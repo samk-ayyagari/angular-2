@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PlayersComponent} from './players.component';
-import {DashboardComponent} from './dashboard.component'
+import {DashboardComponent} from './dashboard.component';
+import {PlayerDetailedComponent} from './player-detail.component';
 import {CricketerService} from './cricketer.service';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 
@@ -29,6 +30,11 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
     name: 'Dashboard',
     component: DashboardComponent,
     useAsDefault: true
+  },
+  {
+    path: '/detail/:id',
+    name: 'PlayerDetail',
+    component: PlayerDetailedComponent
   }
 ])
 

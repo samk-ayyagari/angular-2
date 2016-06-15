@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Cricketer} from './Cricketer';
-import {PlayerDetailedComponent} from './player-detail.component';
+import {Cricketer} from './cricketer';
+import { PlayerDetailedComponent} from './player-detail.component';
 import {CricketerService} from './cricketer.service';
+import { Router } from '@angular/router-deprecated';
 
 @Component({
    selector: 'my-players',
@@ -11,28 +12,51 @@ import {CricketerService} from './cricketer.service';
             <span class="badge">{{player.id}}</span> {{player.name}}
         </li>
     </ul>
-   <my-player-detail [player]="selectedPlayer"></my-player-detail>
+    <div *ngIf="selectedPlayer">
+        <h2>
+            {{selectedPlayer.name | uppercase}} is my hero
+        </h2>
+    </div>
+        <button (click)="addPlayer()">Add New Player</button>
+        <div *ngIf="addingPlayer">
+        <my-player-detail (close)="close($event)"></my-player-detail>
+       </div>
     `,
-    directives:[PlayerDetailedComponent]     
+    directives: [PlayerDetailedComponent]
 })
 export class PlayersComponent implements OnInit{
     players:Cricketer[];
     selectedPlayer: Cricketer;
+    addingPlayer = false;
+    error: any;
 
-    constructor(private cricketerService:CricketerService){}
+    constructor(
+        private cricketerService:CricketerService,
+        private router:Router
+    ){}
 
     getPlayers(){
         this.cricketerService.getPlayers().then(players => this.players = players);
-       // console.log(this.players)
+        console.log(this.players)
     }
 
     onSelect(player:Cricketer){
         this.selectedPlayer = player;
+        this.router.navigate(['PlayerDetail', { id: this.selectedPlayer.id }]);
     }
 
     ngOnInit(){
         this.getPlayers();
-        //console.log(this.players);
+    }
+
+    addPlayer(){
+        this.addingPlayer = true;
+        this.selectedPlayer = null;
+    }
+
+     close(savedPlayer: Cricketer) {
+        this.addingPlayer = false;
+        if (savedPlayer) { this.getPlayers(); }
     }
 }
  

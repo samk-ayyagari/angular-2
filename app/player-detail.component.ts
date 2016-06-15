@@ -1,20 +1,40 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit,EventEmitter, Input, Output } from '@angular/core';
+import { RouteParams } from '@angular/router-deprecated';
+import { CricketerService } from './cricketer.service';
 import { Cricketer } from './cricketer';
 @Component({
   selector: 'my-player-detail',
-  template:`<div *ngIf="player">
-    <h2>{{player.name}} details!</h2>
-    <div><label>id: </label>{{player.id}}</div>
-    <div>
-      <label>name: </label>
-      <input [(ngModel)]="player.name" placeholder="name"/>
-    </div>
-  </div>`
+  templateUrl: 'app/player-detail.component.html'
 })
 
 
-export class PlayerDetailedComponent {
-    @Input() 
-  player: Cricketer;
+export class PlayerDetailedComponent implements OnInit {
+  @Input() player: Cricketer;
+  @Output() close = new EventEmitter();
+  error: any;
+  navigated = false;;
+
+  constructor(
+    private cricketService: CricketerService,
+    private routeParams: RouteParams) {
+  }
+
+  ngOnInit() {
+    if (this.routeParams.get('id') !== null) {
+      let id = +this.routeParams.get('id');
+      this.navigated = true;
+      this.cricketService.getPlayer(id)
+          .then(player => this.player = player);
+    } else {
+      this.navigated = false;
+      this.player = new Cricketer();
+    }
+  }
+
+
+  goBack(player: Cricketer = null) {
+    this.close.emit(player);
+    if (this.navigated) { window.history.back(); }
+  }
   
 }

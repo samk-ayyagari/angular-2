@@ -15,19 +15,18 @@ export class DashboardComponent implements OnInit {
     private cricketerService: CricketerService) {}
     
   
-  getPlayers(){
+    getPlayers(){
         this.cricketerService.getPlayers().then(players => this.players = players);
-        this.players = [{
-          "id" : 1,
-          "name": "sameer",
-          "matches":3,
-          "runs":4343
-        }]
-       // console.log(this.players)
     }
 
     ngOnInit(){
         this.getPlayers();
         //console.log(this.players);
     }
+
+    gotoDetail(player: Cricketer) {
+      let link = ['PlayerDetail', { id: player.id }];
+      this.router.navigate(link);
+    }
+
 }
