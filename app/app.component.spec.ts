@@ -9,7 +9,6 @@ import {
 } from '@angular/core/testing';
 
 import { TestComponentBuilder } from '@angular/compiler/testing';
-
 import { By }             from '@angular/platform-browser';
 import { provide }        from '@angular/core';
 import { ViewMetadata }   from '@angular/core';
