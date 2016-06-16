@@ -12,6 +12,7 @@ Get it now</a> if it's not already installed on your machine.
 
 ## Running the application
 ```bash
+cd angular-2
 npm install
 npm start
 ```
