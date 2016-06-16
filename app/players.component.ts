@@ -8,10 +8,11 @@ import { Router } from '@angular/router-deprecated';
    selector: 'my-players',
    template:`
     <ul class = "playersList">
-        <li *ngFor="let player of players" (click)="onSelect(player)">
-           {{player.name}}
-           <button>X</button>
+        <li *ngFor="let player of players">
+           <div (click)="onSelect(player)" class = "player-name">{{player.name}}</div>
+           <button class="player-delete"(click)="delete(player)">X</button>
         </li>
+        
     </ul>
     <div *ngIf="selectedPlayer">
         <h2>
@@ -60,8 +61,7 @@ export class PlayersComponent implements OnInit{
         if (savedPlayer) { this.getPlayers(); }
     }
 
-    delete(player: Cricketer, event: any) {
-        event.stopPropagation();
+    delete(player: Cricketer) {
         this.cricketerService
             .delete(player)
             .then(res => {

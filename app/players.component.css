@@ -5,10 +5,18 @@
 .playersList > li {
     cursor: pointer;
     background: #eee;
-    padding:1em;
-    margin:1em;
+    padding: 1em 0 2em 0;
+    
+    margin: 1em 0 1em 0;
     width:15em;
+    clear: both;
 }
 .player-container {
     margin-top: 1em;
+}
+.player-name{
+    float: left;
+}
+.player-delete{
+    float: right;
 }
