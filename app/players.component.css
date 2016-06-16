@@ -1,0 +1,14 @@
+.playersList{
+    list-style-type: none;
+}
+
+.playersList > li {
+    cursor: pointer;
+    background: #eee;
+    padding:1em;
+    margin:1em;
+    width:15em;
+}
+.player-container {
+    margin-top: 1em;
+}

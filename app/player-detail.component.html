@@ -1,9 +1,34 @@
-<div *ngIf="player">
+
+<div class = "player-detail-form" *ngIf="player">
     <h2>{{player.name}} details!</h2>
-    <div><label>id: </label>{{player.id}}</div>
-    <div>
-      <label>name: </label>
-      <input [(ngModel)]="player.name" placeholder="name"/>
+    <div><label>Id: </label>{{player.id}}</div>
+    <div class = "player-container">
+      <label class = "player-label">Name: </label>
+      <input [(ngModel)]="player.name" placeholder="name" class="player-input"/>
     </div>
-    <button (click)="goBack()">Back</button>
+     <div class = "player-container">
+      <label class = "player-label">Matches: </label>
+      <input [(ngModel)]="player.matches" placeholder="name" class="player-input"/>
+    </div>
+     <div class = "player-container">
+      <label class = "player-label">Notouts</label>
+      <input [(ngModel)]="player.notouts" placeholder="name" class="player-input"/>
+    </div>
+     <div class = "player-container">
+      <label class = "player-label">Highscore</label>
+      <input [(ngModel)]="player.runs" placeholder="name" class="player-input"/>
+    </div>
+     <div class = "player-container">
+      <label class = "player-label">Average</label>
+      <input [(ngModel)]="player.highscore" placeholder="name" class="player-input"/>
+    </div>
+    <div class = "player-container">
+      <label class = "player-label">Hunderds</label>
+      <input [(ngModel)]="player.average" placeholder="name" class="player-input"/>
+    </div>
+  </div>
+  <div class="button-container">
+    <button (click)="goBack()" >Back</button>
+    <button (click)="save()">Save</button>
+    <button *ngIf="navigated" (click)="delete()">Delete</button>
   </div>

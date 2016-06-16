@@ -1,0 +1,27 @@
+.player-container {
+    margin-top: 1em;
+    clear:both;
+}
+
+.player-label{
+    font-weight: bold;
+}
+
+.player-input {
+    width:13em;
+    height: 2em;
+    float: right;
+}
+.player-detail-form{
+    width:15em;
+}
+
+.button-container {
+    margin-top: 3em;
+}
+button {
+    width :7em;
+    background: #eee;
+    float: left;
+    margin-right: 1em;
+}

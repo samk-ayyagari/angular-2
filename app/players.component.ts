@@ -7,22 +7,24 @@ import { Router } from '@angular/router-deprecated';
 @Component({
    selector: 'my-players',
    template:`
-    <ul>
+    <ul class = "playersList">
         <li *ngFor="let player of players" (click)="onSelect(player)">
-            <span class="badge">{{player.id}}</span> {{player.name}}
+           {{player.name}}
+           <button>X</button>
         </li>
     </ul>
     <div *ngIf="selectedPlayer">
         <h2>
-            {{selectedPlayer.name | uppercase}} is my hero
+            {{selectedPlayer.name | uppercase}}
         </h2>
     </div>
         <button (click)="addPlayer()">Add New Player</button>
         <div *ngIf="addingPlayer">
-        <my-player-detail (close)="close($event)"></my-player-detail>
-       </div>
+            <my-player-detail (close)="close($event)"></my-player-detail>
+        </div>
     `,
-    directives: [PlayerDetailedComponent]
+    directives: [PlayerDetailedComponent],
+    styleUrls:  ['app/players.component.css'],
 })
 export class PlayersComponent implements OnInit{
     players:Cricketer[];
@@ -37,7 +39,6 @@ export class PlayersComponent implements OnInit{
 
     getPlayers(){
         this.cricketerService.getPlayers().then(players => this.players = players);
-        console.log(this.players)
     }
 
     onSelect(player:Cricketer){
@@ -54,9 +55,20 @@ export class PlayersComponent implements OnInit{
         this.selectedPlayer = null;
     }
 
-     close(savedPlayer: Cricketer) {
+    close(savedPlayer: Cricketer) {
         this.addingPlayer = false;
         if (savedPlayer) { this.getPlayers(); }
+    }
+
+    delete(player: Cricketer, event: any) {
+        event.stopPropagation();
+        this.cricketerService
+            .delete(player)
+            .then(res => {
+            this.players = this.players.filter(h => h !== player);
+            if (this.selectedPlayer === player) { this.selectedPlayer = null; }
+            })
+            .catch(error => this.error = error);
     }
 }
  

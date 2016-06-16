@@ -4,7 +4,9 @@ import { CricketerService } from './cricketer.service';
 import { Cricketer } from './cricketer';
 @Component({
   selector: 'my-player-detail',
-  templateUrl: 'app/player-detail.component.html'
+  templateUrl: 'app/player-detail.component.html',
+  styleUrls : ['app/player-detail.component.css']
+  
 })
 
 
@@ -36,5 +38,22 @@ export class PlayerDetailedComponent implements OnInit {
     this.close.emit(player);
     if (this.navigated) { window.history.back(); }
   }
+
+  save() {
+    this.cricketService
+        .save(this.player)
+        .then(player => {
+          this.player = player; 
+          this.goBack(player);
+        })
+        .catch(error => this.error = error);
+  }
+
+  delete() {
+        this.cricketService
+            .delete(this.player)
+            .then()
+            .catch(error => this.error = error);
+    }
   
 }

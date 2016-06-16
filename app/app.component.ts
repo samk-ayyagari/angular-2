@@ -8,11 +8,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
 @Component({
    selector: 'my-app',
    template:`
-    <h1>Indian Team Cricketers</h1>
-     <nav>
-      <a [routerLink]="['Dashboard']">Dashboard</a>
-      <a [routerLink]="['Players']">Players</a>
-    </nav>
+    <h1>Wisden Best Crickters</h1>
     <router-outlet></router-outlet>
     `,
     directives:[ROUTER_DIRECTIVES],
@@ -23,13 +19,13 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
   {
     path: '/players',
     name: 'Players',
-    component: PlayersComponent
+    component: PlayersComponent,
+    useAsDefault: true
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: DashboardComponent,
-    useAsDefault: true
+    component: DashboardComponent
   },
   {
     path: '/detail/:id',
